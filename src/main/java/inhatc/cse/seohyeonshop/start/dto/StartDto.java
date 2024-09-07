@@ -8,7 +8,6 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-//
 public class StartDto {
     private String name;
     private int grade;

@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 class ItemRepositoryTest {
@@ -31,5 +33,14 @@ class ItemRepositoryTest {
         System.out.println(savedItem);
 
     }
-
+    @Test
+    public void findByItemNmTest(){
+        List<Item> itemList=itemRepository.findByItemNm("신상품2");
+        for (Item item : itemList) {
+            System.out.println(item);
+            
+        }
+        itemList.forEach(item -> System.out.println(item));
+    }
+    
 }

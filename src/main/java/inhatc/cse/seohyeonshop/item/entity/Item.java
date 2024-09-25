@@ -1,6 +1,12 @@
 package inhatc.cse.seohyeonshop.item.entity;
+import inhatc.cse.seohyeonshop.item.constant.ItemSellStatus;
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -26,4 +32,5 @@ public class Item {
     @Lob
     @Column(nullable = false)
     private String itemDetail;
+
 }

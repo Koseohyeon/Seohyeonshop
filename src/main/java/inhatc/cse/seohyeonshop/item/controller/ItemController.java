@@ -34,12 +34,6 @@ public class ItemController {
         return "item/thymeleaf2";
     }
 
-    @GetMapping("/temp/temp")
-    public String ex(){
-
-        return "temp/temp";
-    }
-
     @GetMapping("/item/thymeleaf3")
     public String thymeleaf3(Model model){
         List<ItemDto> itemDtoList= new ArrayList<>();

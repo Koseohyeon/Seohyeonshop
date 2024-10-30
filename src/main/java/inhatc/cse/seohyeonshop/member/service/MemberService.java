@@ -26,15 +26,8 @@ public class MemberService {
         Optional<Member> mem = memberRepository.findByEmail(member.getEmail());
         if (mem.isPresent()){
             Member m=mem.get();
-            System.out.println(m);
-        }else {
             throw new IllegalStateException("이미 가입된 회원입니다");
         }
-
-        /*Member m= memberRepository.findByEmail(member.getEmail())
-                .orElseThrow(()->new IllegalStateException("이미 존재하는 회원입니다"));
-        System.out.println(m);
-*/
 
     }
 

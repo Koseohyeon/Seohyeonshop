@@ -10,12 +10,11 @@ public class StartController {
 
     @GetMapping("/")
     public String start(Model model){
-        /*StartDto startDto = StartDto.builder()
+        StartDto startDto = StartDto.builder()
                 .dept("컴시과")
-                .grade(3)
                 .name("고서현")
                 .build();
-        model.addAttribute("data",startDto);*/
+        model.addAttribute("data",startDto);
         return "temp/temp";
 
     }

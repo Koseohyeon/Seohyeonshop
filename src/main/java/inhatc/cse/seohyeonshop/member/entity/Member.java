@@ -16,7 +16,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-   // @Column(name = "member_id")
+    @Column(name = "member_id")
     private  Long id;
 
     @Column(length = 30,nullable = false)
@@ -31,7 +31,7 @@ public class Member {
     @Column(length = 200,nullable = true)
     private String address;
 
-    @Enumerated(EnumType.ORDINAL)
+    @Enumerated(EnumType.STRING)
     private Role role;
 
     public static Member createMember(MemberDto memberDto, PasswordEncoder passwordEncoder){

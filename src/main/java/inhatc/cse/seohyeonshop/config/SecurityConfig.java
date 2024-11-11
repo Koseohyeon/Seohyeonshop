@@ -16,9 +16,29 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
-        http.csrf(AbstractHttpConfigurer::disable);
-        http.formLogin(Customizer.withDefaults());
+
+//        http.csrf(AbstractHttpConfigurer::disable);
+
+        http.formLogin(form -> form
+                .loginPage("/member/login")
+                .defaultSuccessUrl("/")
+                .failureUrl("/member/login/error")
+                .usernameParameter("email")
+                .passwordParameter("password")
+                .permitAll()
+        );
         http.logout(Customizer.withDefaults());
+
+        http.authorizeHttpRequests(request -> request
+                .requestMatchers("/css/**").permitAll()
+                .requestMatchers("/","/member/**").permitAll()
+                .requestMatchers("/admin/**").hasRole("ADMIN")
+                .anyRequest().authenticated()
+        );
+        http.exceptionHandling(exception -> exception
+                .authenticationEntryPoint(new CustomAuthenticationEntryPoint()));
+
+
         return http.build();
     }
 

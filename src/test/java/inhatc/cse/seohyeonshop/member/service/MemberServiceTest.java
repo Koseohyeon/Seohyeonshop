@@ -38,6 +38,5 @@ class MemberServiceTest {
         Member member = createMember();
         Member savedMember = memberService.saveMember(member);
         assertEquals("hong@email.com",savedMember.getEmail()); //앞에 기댓값 뒤에 실제 값
-        System.out.println(savedMember);
     }
 }

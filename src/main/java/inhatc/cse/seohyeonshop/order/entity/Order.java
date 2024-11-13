@@ -1,11 +1,15 @@
 package inhatc.cse.seohyeonshop.order.entity;
 
+import inhatc.cse.seohyeonshop.common.entity.BaseEntity;
 import inhatc.cse.seohyeonshop.member.entity.Member;
 import inhatc.cse.seohyeonshop.order.constant.OrderStatus;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.Fetch;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name="orders")
@@ -15,7 +19,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Order {
+public class Order extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "order_id")
@@ -26,7 +30,11 @@ public class Order {
     @JoinColumn(name = "member_id")
     private Member member;
 
-    private LocalDateTime orderDate;
+    private LocalDateTime orderDate;    //주문일
     @Enumerated(EnumType.STRING)
     private OrderStatus orderStatus;
+
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "order",
+            cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<OrderItem> orderItems =new ArrayList();
 }

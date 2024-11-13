@@ -1,5 +1,6 @@
 package inhatc.cse.seohyeonshop.cart.entity;
 
+import inhatc.cse.seohyeonshop.common.entity.BaseEntity;
 import inhatc.cse.seohyeonshop.member.entity.Member;
 import jakarta.persistence.*;
 import lombok.*;
@@ -14,7 +15,7 @@ import java.lang.management.LockInfo;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Cart {
+public class Cart extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "cart_id")

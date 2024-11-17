@@ -35,6 +35,9 @@ public class Order extends BaseEntity {
     private OrderStatus orderStatus;
 
     @OneToMany(fetch = FetchType.LAZY,mappedBy = "order",
-            cascade = CascadeType.ALL, orphanRemoval = true)
+        cascade = CascadeType.ALL, orphanRemoval = true)
+
+    //12주차 과제(영속성 테스트)
+    //@OneToMany(mappedBy = "order", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OrderItem> orderItems =new ArrayList();
 }

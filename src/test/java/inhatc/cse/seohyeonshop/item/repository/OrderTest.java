@@ -128,8 +128,6 @@ public class OrderTest {
         System.out.println("==========================");
         orderItem.getOrder().getOrderDate();
         System.out.println("==========================");
-
-
     }
 
 

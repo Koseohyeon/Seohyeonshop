@@ -3,19 +3,50 @@ package inhatc.cse.seohyeonshop.item.controller;
 import inhatc.cse.seohyeonshop.item.dto.ItemDataDto;
 import inhatc.cse.seohyeonshop.item.dto.ItemDto;
 import inhatc.cse.seohyeonshop.item.dto.ItemFormDto;
+import inhatc.cse.seohyeonshop.item.service.ItemService;
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.BindParam;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 @Controller
+@RequiredArgsConstructor
 public class ItemController {
+    private final ItemService itemService;
+    @PostMapping("/admin/item/add")
+    public String itemAdd(@Valid ItemFormDto itemFormDto,//form에서 넘어온 데이터
+                          BindingResult bindingResult,//바인딩 결과
+                          @RequestParam("itemImgFile") List<MultipartFile>itemImgList,
+                          Model model){
+        if(bindingResult.hasErrors()){
+            return "member/add";
+        }
+        if(itemImgList.get(0).isEmpty()&&itemFormDto.getId()==null){
+            model.addAttribute("errorMessage","첫번째 상품의 이미지는 필수입니다");
+            return "item/add";
+        }
+        try {
+            itemService.SaveItem(itemFormDto,itemImgList);
+        } catch (IOException e) {
+            model.addAttribute("errorMessage","파일 저장에 실패했습니다.다시!!");
+            return "item/add";
+        }
+        return "redirect:/";
+    }
 
-    @GetMapping("/admin/item/add")
-    public String itemAdd(Model model){
+
+        @GetMapping("/admin/item/add")
+    public String itemForm(Model model){
         model.addAttribute("itemFormDto",new ItemFormDto());
         return "item/add";
     }

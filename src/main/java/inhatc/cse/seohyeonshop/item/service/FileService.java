@@ -18,6 +18,7 @@ public class FileService {
 
         UUID uuid = UUID.randomUUID(); //랜덤으로 id 생성해줌
         String ext = originalFileName.substring(originalFileName.lastIndexOf("."), originalFileName.length());
+        System.out.println("==============" + ext);
         String savedFileName = uuid.toString() + ext;
         String fileUploadFullUrl= uploadPath + "/"+ savedFileName;
 

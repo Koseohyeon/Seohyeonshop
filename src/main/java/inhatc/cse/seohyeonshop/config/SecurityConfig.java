@@ -30,7 +30,7 @@ public class SecurityConfig {
         http.logout(Customizer.withDefaults());
 
         http.authorizeHttpRequests(request -> request
-                .requestMatchers("/css/**").permitAll()
+                .requestMatchers("/css/**","/img/**","/images/**").permitAll()
                 .requestMatchers("/","/member/**").permitAll()
                 .requestMatchers("/admin/**").hasRole("ADMIN")
                 .anyRequest().authenticated()
